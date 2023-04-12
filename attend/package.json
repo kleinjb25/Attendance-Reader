@@ -1,0 +1,1 @@
+{"name":"Attendance Taker","version":"1.0.0","description":"sends attendance to the hub","main":"bot.js","author":"Justin Klein","dependencies":{"discord-fetch-all":"^3.0.2","discord.io":"https://github.com/woor/discord.io/tarball/gateway_v6","discord.js":"^14.9.0","node":"^19.0.1","request":"^2.88.2","winston":"^3.8.2"}}
