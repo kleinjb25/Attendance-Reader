@@ -23,28 +23,11 @@ const bot = new Discord.Client({token: auth.token,
    autorun: true});
 bot.on("ready", () => {
 	logger.info("connected with " + bot.username + ", which has an id of " + bot.id);
-	if (now.getDay() === 2 && time >= start && time <= end) {
-		bot.channels.cache.get("1092974337369329694").send("test");
-	}
-	if (now.getDay() === 2 && time === (12 * 60)) {
-		bot.sendMessage({
-			to: channelID,
-			message: "Meeting today! Where it at? Laws 301 from 6-9pm! The voting has ended! " + options[0] + " won!"
-		});
-	}
-	if (now.getDay() === 2 && time === (20 * 60)) {
-		if (options.size != 0) {
-			bot.sendMessage({
-				to: channelID,
-				message: "Vote for what we are going to do for next weeks meeting! the options are " + options.join(", ")
-			});
-		}
-		
-	}
 });
 
 bot.on("message", function (user1, userID, channelID, message, evt) {
 	if (message.substring(0, 1) === "$") {
+		admin = false;
 		var query = message.substring(1).split(" ");
 		var command = query[0] + query[1];
 		var uniqueid = query[1];
@@ -186,49 +169,7 @@ bot.on("message", function (user1, userID, channelID, message, evt) {
 					});
 				}
 				break;
-			}  case 'addEvent' + query[1]: {
-				if (admin) {
-					if (query[1] === undefined) {
-						bot.sendMessage({
-							to: channelID,	
-							message: "No Event? D:"
-						});
-					} else {
-						options.push(query[1]);
-						bot.sendMessage({
-							to: channelID,
-							message: "Your event has been added to the list of possible events for next meeting."
-						});
-					}
-					
-				} else {
-					bot.sendMessage({
-						to: channelID,
-						message: "You are not an admin!"
-					});
-				}
-			} case 'remEvent' + query[1]: {
-				if (admin) {
-					if (query[1] === undefined) {
-						bot.sendMessage({
-							to: channelID,	
-							message: "No Event? D:"
-						});
-					} else {
-						options.push(query[1]);
-						bot.sendMessage({
-							to: channelID,
-							message: "Your event has been added to the list of possible events for next meeting."
-						});
-					}
-					
-				} else {
-					bot.sendMessage({
-						to: channelID,
-						message: "You are not an admin!"
-					});
-				}
-			} default: {
+			}  default: {
 				bot.sendMessage({
 					to: channelID,	
 					message: "Oh I am SOOOOO sorry. ~~/s~~ I don't know what you were trying to type. You can see a list of commands to use by typing !help or !helpAdmin, if you're an admin."
